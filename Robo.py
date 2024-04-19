@@ -1,15 +1,12 @@
 from AutomacaoSenior import AutomacaoSenior
 from Manutencao import Manutencao
 from Nota import Nota
+from Estoque import Estoque
 import time
 import pyautogui as pt
-import os
-import tkinter as tk
-from tkinter import font
 
-class Robo(AutomacaoSenior, Manutencao, Nota):
-    icone = os.path.join(AutomacaoSenior.diretorio_atual, 'Imagens', 'icon_nelson.ico')
 
+class Robo(AutomacaoSenior, Manutencao, Nota, Estoque):
 
     @staticmethod
     def verificar_texto(mensagem):
@@ -150,38 +147,11 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
             self.loop_comprar_material(quantidade_manutencoes, dicionario_manutencoes)
 
 
-    def configurar_janela(self):
-        # Adiciona o titulo
-        self.janela.title('Sistema de automações Nelson Wendt')
-        # Adiciona o icone superior
-        self.janela.iconbitmap(self.icone)
-        # Ajusta o tamanho da janela
-        self.janela.geometry('418x210+300+280')
-        # Coloca o fundo branco
-        self.janela.configure(bg='#fff')
+    def arrumar_estoque(self):
+        self.janela.destroy()
 
+        codigos, quantidade, observacao, conta_contabil, centro_custo = self.tratar_arquivo_final()
+        self.requisitar_material_estoque(codigos, quantidade, observacao, conta_contabil, centro_custo)
+        self.atender_material_requisitado(codigos)
 
-    def criar_botoes(self):
-        # Botões
-        botao_manutencoes = tk.Button(font=self.fonte, text='Manutenções', command=self.fazer_manutencao, width=19, height=2, bg='#fbff07', fg='#2d4390')
-        botao_manutencoes.grid(row=0, column=0, padx=14, pady=10, sticky='nsew')
-
-        botao_manutencoes_comprar = tk.Button(font=self.fonte, text='Manutenções e Comprar', command=self.fazer_manutencao_comprar, width=19, height=2, bg='#fbff07', fg='#2d4390')
-        botao_manutencoes_comprar.grid(row=0, column=1, padx=14, pady=10, sticky='nsew')
-
-        botao_comprar_material = tk.Button(font=self.fonte, text='Comprar Material', command=self.comprar_material, width=19, height=2, bg='#fbff07', fg='#2d4390')
-        botao_comprar_material.grid(row=1, column=0, padx=14, pady=10, sticky='nsew')
-
-        baixar_notas = tk.Button(font=self.fonte, text='Baixar Notas', command=self.baixar_nota, width=19, height=2, bg='#fbff07', fg='#2d4390')
-        baixar_notas.grid(row=1, column=1, padx=14, pady=10, sticky='nsew')
-
-        emitir_nota_efluente = tk.Button(font=self.fonte, text='Emitir Nota Efluente', command=self.emitir_nota_efluente, width=19, height=2, bg='#fbff07', fg='#2d4390')
-        emitir_nota_efluente.grid(row=2, column=0, padx=14, pady=10, sticky='nsew')
-
-    
-    def criar_interface(self):
-        self.janela = self.janela = tk.Tk()
-        self.fonte = font.Font(family='Roboto', size=12)
-        self.configurar_janela()
-        self.criar_botoes()
-        self.janela.mainloop()
+        self.criar_interface()

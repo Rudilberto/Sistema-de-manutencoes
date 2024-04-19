@@ -5,11 +5,14 @@ import os
 import pyscreeze
 
 
-class AutomacaoSenior:
+class AutomacaoSenior():
     pyscreeze.USE_IMAGE_NOT_FOUND_EXCEPTION = False
     data_atual = datetime.date.today()
     data_atual = data_atual.strftime('%d/%m/%Y')
 
+    abspath=os.path.abspath(__file__)
+    dname=os.path.dirname(abspath)
+    os.chdir(dname)
     diretorio_atual = os.getcwd()
     
     aviso_atendimento = os.path.join(diretorio_atual, 'Imagens', 'aviso atendimento.PNG')
@@ -23,9 +26,11 @@ class AutomacaoSenior:
     f210ame = os.path.join(diretorio_atual, 'Imagens', 'F210AME.PNG')
     f210ssm = os.path.join(diretorio_atual, 'Imagens', 'F210SSM.PNG')
     f405gsa = os.path.join(diretorio_atual, 'Imagens', 'F405GSA.PNG')
-    logo = os.path.join(diretorio_atual, 'Imagens', 'logo-programa-senior.PNG')
+    logo = os.path.join(diretorio_atual, 'Imagens', 'seniorlogo.PNG')
     pesquisa_registro = os.path.join(diretorio_atual, 'Imagens', 'pesquisa-registro.PNG')
-
+    f207lot = os.path.join(diretorio_atual, 'Imagens', 'F207LOT.PNG')
+    f000rpf = os.path.join(diretorio_atual, 'Imagens', 'F000RPF.PNG')
+    
 
     def esperar_por_imagem(self, imagem):
         while not pt.locateOnScreen(imagem, confidence=0.9, grayscale=True):
@@ -441,3 +446,75 @@ class AutomacaoSenior:
     # Fecha tudo para fazer a proxima manutenção #
         pt.hotkey('ctrl', 'f4')
         time.sleep(1.5)
+
+    
+    def requisitar_material_estoque(self, codigos, quantidade, observacao, conta_contabil, centro_custo):
+        pt.PAUSE = 0.60
+
+        pt.alert(text='Começando o acerto de estoque!')
+
+        pt.hotkey('alt', 'shift', 'tab')
+
+        while not pt.locateOnScreen(f'{self.logo}', confidence=0.9, grayscale=True):
+            time.sleep(1)
+            pt.hotkey('alt', 'shift', 'tab')
+
+        pt.press('f11')
+        pt.write('f207lot')
+        pt.press('enter')
+
+        self.esperar_por_imagem(self.f207lot)
+
+        pt.press('tab', presses=18, interval=0.2)
+
+        for i in range(len(codigos)):
+            pt.write(codigos[i])
+            pt.press('tab', presses=3)
+            pt.write(str(quantidade[i]))
+            pt.press('tab')
+            pt.write(conta_contabil[i])
+            pt.press('tab')
+            pt.write(centro_custo[i])
+            pt.press('tab')
+            pt.write(observacao[i])
+            pt.press('down') 
+            time.sleep(0.65)
+
+        pt.press('esc')
+        pt.hotkey('alt', 'p')
+        time.sleep(1)
+        pt.hotkey('alt', 's')
+        time.sleep(0.5)
+        pt.hotkey('alt', 'o')
+
+        pt.hotkey('ctrl', 'f4')
+        time.sleep(2)
+
+    
+    def atender_material_requisitado(self, codigos):
+        pt.PAUSE = 0.60
+        
+        pt.press('f11')
+        pt.write('f210ame')
+        pt.press('enter')
+
+        self.esperar_por_imagem(self.f210ame)
+
+        pt.write('31')
+        for _ in range(2):
+            pt.press('tab')
+            pt.write(self.data_atual)
+
+        pt.hotkey('alt', 'm')
+        time.sleep(5)
+
+        pt.hotkey('alt', 'p')
+        time.sleep(1)
+        pt.hotkey('alt', 's')
+        time.sleep(1)
+
+        for _ in range(len(codigos)):
+            self.esperar_por_imagem(self.f000rpf)
+            time.sleep(0.8)
+
+            pt.hotkey('alt', 'o')

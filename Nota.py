@@ -17,16 +17,13 @@ class Nota():
 
         navegador = webdriver.Chrome(options=options, service=service)
 
-        # link edocs
         navegador.get(r'http://192.168.0.13/SDE/Login.aspx?ReturnUrl=%2fsde%2f')
 
-        # logar no edocs
         navegador.find_element('xpath', '//*[@id="txbLogin"]').send_keys('nfe')
         navegador.find_element('xpath', '//*[@id="txbSenha"]').send_keys('nfe')
         time.sleep(1)
         navegador.find_element('xpath', '//*[@id="btnLogin"]').click()
 
-        # Entrar nas emissoes
         navegador.find_element('xpath', '//*[@id="acdMenu"]/div[3]').click()
         time.sleep(1)
         navegador.find_element('xpath', '//*[@id="ctl13_lkbNfeEmissao"]').click()
@@ -34,12 +31,10 @@ class Nota():
         navegador.find_element('xpath', '//*[@id="btnFiltrarNfe"]').click()
         time.sleep(1)
 
-        # Pesquisar nota
         navegador.find_element('xpath',
                                 '//*[@id="filtrofltEmissao3"]').send_keys(nota, Keys.ENTER)
         time.sleep(1)
 
-        # Baixa
         navegador.find_element('xpath', '//*[@id="nfeGridInfo"]').click()
         navegador.find_element('xpath', '//*[@id="btnDanfe"]').click()
 
@@ -56,19 +51,16 @@ class Nota():
         time.sleep(2)
         pt.PAUSE = 0.8
 
-    # Entra da tela de emissao de notas
         pt.press('f11')
         pt.write('F140GNF')
         pt.press('enter')
 
-    # Coloca o fornecedor, transação e insere
         pt.press('tab', presses=4, interval=0.1)
         pt.write('1107')
         pt.press('tab')
         pt.write('5911l')
         pt.hotkey('alt', 'i')
 
-    # Coloca o produto, quantidade e peso
         pt.press('tab', presses=4, interval=0.1)
         pt.write('85002011013')
         pt.press('tab', presses=4, interval=0.1)
@@ -82,7 +74,6 @@ class Nota():
         pt.press('up')
         time.sleep(1.5)
 
-    # Colocar transportadora (Sao miguel = 650) e fechar a nota
         pt.hotkey('alt', 'y')
         time.sleep(2)
         pt.press('tab', presses=5)
@@ -93,7 +84,6 @@ class Nota():
         pt.write('13')
         pt.hotkey('alt', 'p')
 
-    # Fechar a nota
         pt.PAUSE = 1.5
         pt.hotkey('alt', 'f')
         pt.hotkey('alt', 's')

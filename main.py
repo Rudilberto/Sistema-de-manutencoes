@@ -1,4 +1,4 @@
-from Robo import Robo
+from Interface import Interface
 
-interface = Robo()
-interface.criar_interface() 
+interface = Interface()
+interface.criar_interface()
