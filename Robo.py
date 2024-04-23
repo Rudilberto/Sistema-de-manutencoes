@@ -58,7 +58,7 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
             pt.confirm(text='''Manutenções canceladas!''')
             
         else:
-            self.janela.destroy()
+            self.window.destroy()
 
             pt.PAUSE = 0.8
             # Acha o programa
@@ -148,7 +148,7 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
 
 
     def arrumar_estoque(self):
-        self.janela.destroy()
+        self.window.destroy()
 
         codigos, quantidade, observacao, conta_contabil, centro_custo = self.tratar_arquivo_final()
         self.requisitar_material_estoque(codigos, quantidade, observacao, conta_contabil, centro_custo)
