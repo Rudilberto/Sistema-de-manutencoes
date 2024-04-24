@@ -4,6 +4,8 @@ import os
 
 
 class Interface(Robo):
+    window = None
+
     def __init__(self):
         self.diretorio_atual = os.getcwd()
         self.icone = os.path.join(self.diretorio_atual, 'Imagens-interface', 'icon_nelson.ico')
@@ -17,19 +19,15 @@ class Interface(Robo):
         self.img5 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img5.png')
         self.img6 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img6.png')
 
-    
-    def btn_clicked():
-        print("Button Clicked")
-
 
     def criar_interface(self):
-        window = Tk()
-        window.title('Sistema de Automações')
-        window.iconbitmap(self.icone)
-        window.geometry("365x335")
-        window.configure(bg = "#FFFFFF")
+        self.window = Tk()
+        self.window.title('Sistema de Automações')
+        self.window.iconbitmap(self.icone)
+        self.window.geometry("365x335+325+210")
+        self.window.configure(bg = "#FFFFFF")
         canvas = Canvas(
-            window,
+            self.window,
             bg = "#FFFFFF",
             height = 335,
             width = 365,
@@ -134,5 +132,5 @@ class Interface(Robo):
             width = 160,
             height = 30)
 
-        window.resizable(False, False)
-        window.mainloop()
+        self.window.resizable(False, False)
+        self.window.mainloop()

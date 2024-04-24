@@ -9,27 +9,24 @@ class AutomacaoSenior():
     pyscreeze.USE_IMAGE_NOT_FOUND_EXCEPTION = False
     data_atual = datetime.date.today()
     data_atual = data_atual.strftime('%d/%m/%Y')
-
-
-    def __init__(self):    
-        self.diretorio_atual = os.getcwd()
-        
-        self.aviso_atendimento = os.path.join(self.diretorio_atual, 'Imagens', 'aviso atendimento.PNG')
-        self.confirmacao_atendimento = os.path.join(self.diretorio_atual, 'Imagens', 'confirmacao atendimento.PNG')
-        self.confirmar_compra = os.path.join(self.diretorio_atual, 'Imagens', 'confirmar compra.PNG')
-        self.f103aio = os.path.join(self.diretorio_atual, 'Imagens', 'F103AIO.PNG')
-        self.f103emt = os.path.join(self.diretorio_atual, 'Imagens', 'F103EMT.PNG')
-        self.f103prm = os.path.join(self.diretorio_atual, 'Imagens', 'F103PRM.PNG')
-        self.f103rps = os.path.join(self.diretorio_atual, 'Imagens', 'F103RPS.PNG')
-        self.f103smt = os.path.join(self.diretorio_atual, 'Imagens', 'F103SMT.PNG')
-        self.f210ame = os.path.join(self.diretorio_atual, 'Imagens', 'F210AME.PNG')
-        self.f210ssm = os.path.join(self.diretorio_atual, 'Imagens', 'F210SSM.PNG')
-        self.f405gsa = os.path.join(self.diretorio_atual, 'Imagens', 'F405GSA.PNG')
-        self.logo = os.path.join(self.diretorio_atual, 'Imagens', 'seniorlogo.PNG')
-        self.pesquisa_registro = os.path.join(self.diretorio_atual, 'Imagens', 'pesquisa-registro.PNG')
-        self.f207lot = os.path.join(self.diretorio_atual, 'Imagens', 'F207LOT.PNG')
-        self.f000rpf = os.path.join(self.diretorio_atual, 'Imagens', 'F000RPF.PNG')
+    diretorio_atual = os.getcwd()
     
+    aviso_atendimento = os.path.join(diretorio_atual, 'Imagens', 'aviso atendimento.PNG')
+    confirmacao_atendimento = os.path.join(diretorio_atual, 'Imagens', 'confirmacao atendimento.PNG')
+    confirmar_compra = os.path.join(diretorio_atual, 'Imagens', 'confirmar compra.PNG')
+    f103aio = os.path.join(diretorio_atual, 'Imagens', 'F103AIO.PNG')
+    f103emt = os.path.join(diretorio_atual, 'Imagens', 'F103EMT.PNG')
+    f103prm = os.path.join(diretorio_atual, 'Imagens', 'F103PRM.PNG')
+    f103rps = os.path.join(diretorio_atual, 'Imagens', 'F103RPS.PNG')
+    f103smt = os.path.join(diretorio_atual, 'Imagens', 'F103SMT.PNG')
+    f210ame = os.path.join(diretorio_atual, 'Imagens', 'F210AME.PNG')
+    f210ssm = os.path.join(diretorio_atual, 'Imagens', 'F210SSM.PNG')
+    f405gsa = os.path.join(diretorio_atual, 'Imagens', 'F405GSA.PNG')
+    logo = os.path.join(diretorio_atual, 'Imagens', 'seniorlogo.PNG')
+    pesquisa_registro = os.path.join(diretorio_atual, 'Imagens', 'pesquisa-registro.PNG')
+    f207lot = os.path.join(diretorio_atual, 'Imagens', 'F207LOT.PNG')
+    f000rpf = os.path.join(diretorio_atual, 'Imagens', 'F000RPF.PNG')
+
 
     def esperar_por_imagem(self, imagem):
         while not pt.locateOnScreen(imagem, confidence=0.9, grayscale=True):
