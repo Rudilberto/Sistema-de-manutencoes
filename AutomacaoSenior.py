@@ -235,10 +235,6 @@ class AutomacaoSenior():
             pt.press('tab', presses=2, interval=0.2)
 
             pt.write(quantia)
-
-            pt.press('tab', presses=2, interval=0.2)
-
-            pt.write('17:30')
             
         pt.hotkey('alt', 'p')
         time.sleep(1)
@@ -315,42 +311,54 @@ class AutomacaoSenior():
         pt.write('F210AME')
         pt.press('enter')
 
-    # Seleciona o deposito 31 #
-        self.esperar_por_imagem(self.f210ame)
-
-        pt.PAUSE = 0.3
-        pt.write('31')
-
-    # Colocar data no atendimento #
-        pt.press('tab')
-        pt.write(data_atual)
-        pt.press('tab')
-        pt.write(data_atual)
-
     # Mostrar, Marcar, Processar
-        pt.PAUSE = 0.3
-        pt.hotkey('alt', 'e')
-
-        self.esperar_por_imagem(self.f210ssm)
-
-        pt.press('tab', presses=17)
-        pt.press('f3')
-        
-        self.esperar_por_imagem(self.pesquisa_registro)
-        
-        pt.hotkey('alt', 'a')
-        pt.hotkey('alt', 'i')
-        time.sleep(0.6)
-        pt.press('tab', presses=4, interval=0.08)
-        pt.press('enter')
-        
-        self.esperar_por_imagem(self.f210ssm)
-
-        pt.hotkey('alt', 'o')
-        time.sleep(0.2)
-        pt.hotkey('alt', 'm')
-
         for produto, quantidade in dicionario_manutencoes['produto_quantidade'][i]:
+            # Seleciona o deposito 31 #
+            self.esperar_por_imagem(self.f210ame)
+
+            pt.PAUSE = 0.3
+            pt.write('31')
+
+        # Colocar data no atendimento #
+            pt.press('tab')
+            pt.write(data_atual)
+            pt.press('tab')
+            pt.write(data_atual)
+            pt.PAUSE = 0.3
+            pt.hotkey('alt', 'e')
+
+            self.esperar_por_imagem(self.f210ssm)
+            pt.press('tab', presses=13, interval=0.07)
+            pt.press('f3')
+
+            self.esperar_por_imagem(self.pesquisa_registro)
+
+            pt.hotkey('alt', 'a')
+            pt.press('backspace')
+            pt.write(produto)
+            pt.hotkey('alt', 'i')
+            pt.press('tab', presses=4, interval=0.05)
+            pt.press('enter')
+
+            self.esperar_por_imagem(self.f210ssm)
+
+            pt.press('tab', presses=4)
+            pt.press('f3')
+            
+            self.esperar_por_imagem(self.pesquisa_registro)
+            
+            pt.hotkey('alt', 'a')
+            pt.hotkey('alt', 'i')
+            time.sleep(0.6)
+            pt.press('tab', presses=4, interval=0.08)
+            pt.press('enter')
+            
+            self.esperar_por_imagem(self.f210ssm)
+
+            pt.hotkey('alt', 'o')
+            time.sleep(0.2)
+            pt.hotkey('alt', 'm')
+
             pt.press('tab')
             pt.write('0')
 
@@ -358,21 +366,16 @@ class AutomacaoSenior():
             pt.write(quantidade)
             
             pt.hotkey('alt', 'j')
-
             pt.write(dicionario_manutencoes['descricao_compra'][i])
-
-            pt.hotkey('shift', 'tab')
-            pt.press('down')
         
-        pt.hotkey('alt', 'p')
+            pt.hotkey('alt', 'p')
 
-        self.esperar_por_imagem(self.confirmacao_atendimento)
-        
-        pt.hotkey('alt', 's')
+            self.esperar_por_imagem(self.confirmacao_atendimento)
+            pt.hotkey('alt', 's')
 
-        self.esperar_por_imagem(self.confirmar_compra)
-
-        pt.hotkey('alt', 'n')
+            self.esperar_por_imagem(self.confirmar_compra)
+            pt.hotkey('alt', 'n')
+            time.sleep(0.5)
 
         pt.hotkey('ctrl', 'f4')
 
