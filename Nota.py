@@ -44,7 +44,7 @@ class Nota():
         navegador.quit()
     
 
-    def emitir_nota_efluente(self):
+    def nota_efluente(self):
         kilos_efluente = pt.prompt(text='Digite a quantidade (Kilos) de efluente')
         volumes = pt.prompt(text='Digite quantos volumes')
         pt.alert(text='Não mexa no computador até a nota ser finalizada', title='alerta')
@@ -69,7 +69,6 @@ class Nota():
         pt.hotkey('ctrl', 'c')
         time.sleep(0.5)
         nota = pyperclip.paste()
-        print(nota)
 
         pt.press('tab', presses=3, interval=0.1)
         pt.write('1107')

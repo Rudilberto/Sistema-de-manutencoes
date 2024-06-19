@@ -155,3 +155,11 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
         self.atender_material_requisitado(codigos)
 
         self.criar_interface()
+
+    def emitir_nota_efluente(self):
+        self.window.destroy()
+        
+        self.nota_efluente()
+        pt.alert(text='Nota fiscal salva na pasta downloads!')
+
+        self.criar_interface()
