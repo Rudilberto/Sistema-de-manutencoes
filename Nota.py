@@ -5,16 +5,20 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 import pyperclip
+import os
 
 class Nota():
+    diretorio_atual = os.getcwd()
+    f140gnf = os.path.join(diretorio_atual, 'Imagens', 'F140GNF.PNG')
 
-    def baixar_nota(self):
+    def baixar_nota(self, nota=None):
 
         options = webdriver.ChromeOptions()
         options.add_argument('--headless=new')
         service = Service(ChromeDriverManager().install())
 
-        nota = pt.prompt(text='Digite o numero da nota: ')
+        if nota == None:
+            nota = pt.prompt(text='Digite o numero da nota: ')
 
         navegador = webdriver.Chrome(options=options, service=service)
 
@@ -65,6 +69,10 @@ class Nota():
         pt.write('F140GNF')
         pt.press('enter')
 
+        while not pt.locateOnScreen(f'{self.f140gnf}', confidence=0.9, grayscale=True):
+            time.sleep(0.2)
+        time.sleep(0.5)
+
         pt.press('tab')
         pt.hotkey('ctrl', 'c')
         time.sleep(0.5)
@@ -80,11 +88,11 @@ class Nota():
         pt.write('85002011013')
         pt.press('tab', presses=4, interval=0.1)
         pt.write(kilos_efluente)
+        pt.press('tab')
+        pt.write(kilos_efluente)
+        pt.hotkey('tab')
+        pt.write(kilos_efluente)
         pt.press('tab', presses=2)
-        pt.write(kilos_efluente)
-        pt.hotkey('shift', 'tab')
-        pt.write(kilos_efluente)
-        pt.press('tab', presses=3)
         pt.write('5')
         pt.press('up')
         time.sleep(1.5)
@@ -108,33 +116,4 @@ class Nota():
 
         pt.hotkey('ctrl', 'f4')
 
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless=new')
-        service = Service(ChromeDriverManager().install())
-
-        navegador = webdriver.Chrome(options=options, service=service)
-
-        navegador.get(r'http://192.168.0.13/SDE/Login.aspx?ReturnUrl=%2fsde%2f')
-
-        navegador.find_element('xpath', '//*[@id="txbLogin"]').send_keys('nfe')
-        navegador.find_element('xpath', '//*[@id="txbSenha"]').send_keys('nfe')
-        time.sleep(1)
-        navegador.find_element('xpath', '//*[@id="btnLogin"]').click()
-
-        navegador.find_element('xpath', '//*[@id="acdMenu"]/div[3]').click()
-        time.sleep(1)
-        navegador.find_element('xpath', '//*[@id="ctl13_lkbNfeEmissao"]').click()
-        time.sleep(1)
-        navegador.find_element('xpath', '//*[@id="btnFiltrarNfe"]').click()
-        time.sleep(1)
-
-        navegador.find_element('xpath',
-                                '//*[@id="filtrofltEmissao3"]').send_keys(nota, Keys.ENTER)
-        time.sleep(1)
-
-        navegador.find_element('xpath', '//*[@id="nfeGridInfo"]').click()
-        navegador.find_element('xpath', '//*[@id="btnDanfe"]').click()
-
-        time.sleep(2)
-
-        navegador.quit()
+        self.baixar_nota(nota=nota)
