@@ -156,6 +156,7 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
 
         self.criar_interface()
 
+
     def emitir_nota_efluente(self):
         self.window.destroy()
         
