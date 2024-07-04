@@ -156,10 +156,35 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
 
         self.criar_interface()
 
+
     def emitir_nota_efluente(self):
         self.window.destroy()
         
         self.nota_efluente()
         pt.alert(text='Nota fiscal salva na pasta downloads!')
 
+        self.criar_interface()
+
+    
+    def baixar_relatorio_equipamento(self):
+        self.window.destroy()
+
+        lista_equipamento, quantidade_relatorios = self.gerar_lista_equipamento()
+
+        pt.alert(text='Iniciando download de relatorios', title='alerta')
+
+        pt.PAUSE = 0.8
+        # Acha o programa
+        pt.hotkey('alt', 'tab')
+        time.sleep(1.5)
+
+        while not pt.locateOnScreen(f'{self.logo}', confidence=0.9, grayscale=True):
+            time.sleep(1)
+            pt.hotkey('alt', 'shift', 'tab')
+
+        for equipamento in lista_equipamento:
+            self.relatorio_equipamento(equipamento)
+            time.sleep(2)
+        
+        pt.alert(text='Relatorios baixados!')
         self.criar_interface()

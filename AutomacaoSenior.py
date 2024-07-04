@@ -1,39 +1,13 @@
 import datetime
 import time
 import pyautogui as pt
-import os
-import pyscreeze
+from Image import Image
 
 
-class AutomacaoSenior():
-    pyscreeze.USE_IMAGE_NOT_FOUND_EXCEPTION = False
+class AutomacaoSenior(Image):
     data_atual = datetime.date.today()
     data_atual = data_atual.strftime('%d/%m/%Y')
-    diretorio_atual = os.getcwd()
     
-    aviso_atendimento = os.path.join(diretorio_atual, 'Imagens', 'aviso atendimento.PNG')
-    confirmacao_atendimento = os.path.join(diretorio_atual, 'Imagens', 'confirmacao atendimento.PNG')
-    confirmar_compra = os.path.join(diretorio_atual, 'Imagens', 'confirmar compra.PNG')
-    f103aio = os.path.join(diretorio_atual, 'Imagens', 'F103AIO.PNG')
-    f103emt = os.path.join(diretorio_atual, 'Imagens', 'F103EMT.PNG')
-    f103prm = os.path.join(diretorio_atual, 'Imagens', 'F103PRM.PNG')
-    f103rps = os.path.join(diretorio_atual, 'Imagens', 'F103RPS.PNG')
-    f103smt = os.path.join(diretorio_atual, 'Imagens', 'F103SMT.PNG')
-    f210ame = os.path.join(diretorio_atual, 'Imagens', 'F210AME.PNG')
-    f210ssm = os.path.join(diretorio_atual, 'Imagens', 'F210SSM.PNG')
-    f405gsa = os.path.join(diretorio_atual, 'Imagens', 'F405GSA.PNG')
-    logo = os.path.join(diretorio_atual, 'Imagens', 'seniorlogo.PNG')
-    pesquisa_registro = os.path.join(diretorio_atual, 'Imagens', 'pesquisa-registro.PNG')
-    f207lot = os.path.join(diretorio_atual, 'Imagens', 'F207LOT.PNG')
-    f000rpf = os.path.join(diretorio_atual, 'Imagens', 'F000RPF.PNG')
-
-
-    def esperar_por_imagem(self, imagem):
-        while not pt.locateOnScreen(imagem, confidence=0.9, grayscale=True):
-            time.sleep(0.2)
-        time.sleep(0.5)
-
-
     def comprar_produto(self, dicionario_manutencoes, i):
         '''Compra o produto'''
 
@@ -382,7 +356,7 @@ class AutomacaoSenior():
 
     def finalizar_manutencao(self, data_atual=data_atual):
         '''Volta no painel de controle e aponta a manutenção'''
-
+        
         time.sleep(1)
         pt.PAUSE = 0.8
         pt.press('f11')
@@ -517,3 +491,60 @@ class AutomacaoSenior():
             time.sleep(0.8)
 
             pt.hotkey('alt', 'o')
+        
+        pt.press('enter', presses=2, interval=0.8)
+
+    
+    def relatorio_equipamento(self, equipamento, data_atual=data_atual):
+        '''Baixa relatorios de equipamento do modelo nw - 500'''
+
+        pt.PAUSE = 0.9
+        pt.keyDown('alt')
+        pt.press('n')
+        pt.press('r')
+        pt.keyUp('alt')
+
+        self.esperar_por_imagem(self.modelo501)
+
+        pt.PAUSE = 0.3
+
+        pt.press('tab', presses=2, interval=0.2)
+        pt.press('f3')
+
+        self.esperar_por_imagem(self.pesquisa_registro)
+
+        pt.hotkey('alt', 'a')
+        pt.press('backspace')
+        pt.write(equipamento)
+        pt.hotkey('alt', 'i')
+        time.sleep(0.6)
+        pt.press('tab', presses=4, interval=0.08)
+        pt.press('enter')   
+
+        self.esperar_por_imagem(self.modelo501)
+        pt.press('tab')
+
+        # TODO Arrumar para quando não haver manutenções naquele dia
+        pt.write(data_atual)
+
+        pt.hotkey('alt', 'o')
+
+        pt.PAUSE = 0.9
+
+        self.esperar_por_imagem(self.salvar)
+        imagem = pt.locateCenterOnScreen(self.salvar, confidence=0.9, grayscale=True)
+
+        pt.click(imagem)
+        pt.write(equipamento)
+        pt.press('tab')
+        pt.press('down', presses=18, interval=0.09)
+        time.sleep(1)
+        pt.press('enter')
+        pt.press('tab', presses=3, interval=0.5)
+        pt.press('down')
+        time.sleep(1)
+        pt.press('r', presses=2, interval=1)
+        time.sleep(1)
+        pt.press('enter', presses=2, interval=0.5)
+        time.sleep(5)
+        pt.hotkey('alt', 'f4')

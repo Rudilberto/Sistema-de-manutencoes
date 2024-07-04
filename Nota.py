@@ -5,11 +5,9 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 import pyperclip
-import os
+from Image import *
 
-class Nota():
-    diretorio_atual = os.getcwd()
-    f140gnf = os.path.join(diretorio_atual, 'Imagens', 'F140GNF.PNG')
+class Nota(Image):    
 
     def baixar_nota(self, nota=None):
 
@@ -58,9 +56,7 @@ class Nota():
         pt.hotkey('alt', 'tab')
         time.sleep(1.5)
 
-        while not pt.locateOnScreen(f'{self.logo}', confidence=0.9, grayscale=True):
-            time.sleep(1)
-            pt.hotkey('alt', 'shift', 'tab')
+        self.esperar_por_imagem(self.logo)
 
         time.sleep(2)
         pt.PAUSE = 0.8
@@ -69,9 +65,7 @@ class Nota():
         pt.write('F140GNF')
         pt.press('enter')
 
-        while not pt.locateOnScreen(f'{self.f140gnf}', confidence=0.9, grayscale=True):
-            time.sleep(0.2)
-        time.sleep(0.5)
+        self.esperar_por_imagem(self.f140gnf)
 
         pt.press('tab')
         pt.hotkey('ctrl', 'c')
