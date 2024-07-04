@@ -11,6 +11,7 @@ class Interface(Robo):
         self.icone = os.path.join(self.diretorio_atual, 'Imagens-interface', 'icon_nelson.ico')
 
         self.backgroundimg = os.path.join(self.diretorio_atual, 'Imagens-interface', 'background.png')
+        self.img = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img.png')
         self.img0 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img0.png')
         self.img1 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img1.png')
         self.img2 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img2.png')
@@ -41,12 +42,25 @@ class Interface(Robo):
             182.5, 167.5,
             image=background_img)
 
+        img = PhotoImage(file = self.img)
+        b = Button(
+            image = img,
+            borderwidth = 0,
+            highlightthickness = 0,
+            command = self.baixar_relatorio_equipamento, # baixar_relatorio_equipamento - arrumar_estoque
+            relief = "flat")
+
+        b.place(
+            x = 190, y = 270,
+            width = 160,
+            height = 30)
+        
         img0 = PhotoImage(file = self.img0)
         b0 = Button(
             image = img0,
             borderwidth = 0,
             highlightthickness = 0,
-            command = self.arrumar_estoque,
+            command = self.arrumar_estoque, # baixar_relatorio_equipamento - arrumar_estoque
             relief = "flat")
 
         b0.place(

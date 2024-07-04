@@ -493,3 +493,58 @@ class AutomacaoSenior(Image):
             pt.hotkey('alt', 'o')
         
         pt.press('enter', presses=2, interval=0.8)
+
+    
+    def relatorio_equipamento(self, equipamento, data_atual=data_atual):
+        '''Baixa relatorios de equipamento do modelo nw - 500'''
+
+        pt.PAUSE = 0.9
+        pt.keyDown('alt')
+        pt.press('n')
+        pt.press('r')
+        pt.keyUp('alt')
+
+        self.esperar_por_imagem(self.modelo501)
+
+        pt.PAUSE = 0.3
+
+        pt.press('tab', presses=2, interval=0.2)
+        pt.press('f3')
+
+        self.esperar_por_imagem(self.pesquisa_registro)
+
+        pt.hotkey('alt', 'a')
+        pt.press('backspace')
+        pt.write(equipamento)
+        pt.hotkey('alt', 'i')
+        time.sleep(0.6)
+        pt.press('tab', presses=4, interval=0.08)
+        pt.press('enter')   
+
+        self.esperar_por_imagem(self.modelo501)
+        pt.press('tab')
+
+        # TODO Arrumar para quando não haver manutenções naquele dia
+        pt.write(data_atual)
+
+        pt.hotkey('alt', 'o')
+
+        pt.PAUSE = 0.9
+
+        self.esperar_por_imagem(self.salvar)
+        imagem = pt.locateCenterOnScreen(self.salvar, confidence=0.9, grayscale=True)
+
+        pt.click(imagem)
+        pt.write(equipamento)
+        pt.press('tab')
+        pt.press('down', presses=18, interval=0.09)
+        time.sleep(1)
+        pt.press('enter')
+        pt.press('tab', presses=3, interval=0.5)
+        pt.press('down')
+        time.sleep(1)
+        pt.press('r', presses=2, interval=1)
+        time.sleep(1)
+        pt.press('enter', presses=2, interval=0.5)
+        time.sleep(5)
+        pt.hotkey('alt', 'f4')

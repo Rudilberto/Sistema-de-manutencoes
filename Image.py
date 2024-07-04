@@ -24,6 +24,8 @@ class Image():
     f207lot = os.path.join(diretorio_atual, 'Imagens', 'F207LOT.PNG')
     f000rpf = os.path.join(diretorio_atual, 'Imagens', 'F000RPF.PNG')
     f140gnf = os.path.join(diretorio_atual, 'Imagens', 'F140GNF.PNG')
+    modelo501 = os.path.join(diretorio_atual, 'Imagens', 'modelo501.PNG')
+    salvar = os.path.join(diretorio_atual, 'Imagens', 'salvar.PNG')
 
     def esperar_por_imagem(self, imagem):
         while not pt.locateOnScreen(imagem, confidence=0.9, grayscale=True):

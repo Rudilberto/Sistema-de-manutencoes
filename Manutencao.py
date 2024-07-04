@@ -2,9 +2,9 @@ import pyautogui as pt
 
 class Manutencao():
 
-    def gerar_quantidade_manutencoes(self):
+    def gerar_quantidade_iteracoes(self):
         while True:
-            quantidade_manutencoes = pt.prompt(text='Digite quantas manutenções serão feitas')
+            quantidade_manutencoes = pt.prompt(text='Digite quantas manutenções/relatórios serão feitos')
 
             if quantidade_manutencoes is None:
                 pt.alert(text='Campo vazio. Digite um valor.', title='Erro de digitação')
@@ -79,7 +79,7 @@ produto e quantidade: {ProdutoQuantia}''')
 
     def gerar_dicionario_manutencoes(self):
 
-        quantidade_manutencoes = self.gerar_quantidade_manutencoes()
+        quantidade_manutencoes = self.gerar_quantidade_iteracoes()
         
         lista_equipamento, lista_descricoes_manutencao, lista_quantos_produtos, produto_quantidade = self.informacoes_manutencao(quantidade_manutencoes)
 
@@ -199,7 +199,7 @@ produto e quantidade: {ProdutoQuantia}''')
 
     def gerar_dicionario_manutencoes_compras(self):
 
-        quantidade_manutencoes = self.gerar_quantidade_manutencoes()
+        quantidade_manutencoes = self.gerar_quantidade_iteracoes()
 
         lista_equipamento, lista_descricoes_manutencao, lista_quantos_produtos, lista_descricoes_compra, produto_quantidade, produto_quantidade_descricao = self.informacoes_manutencao_comprar(quantidade_manutencoes)
 
@@ -215,3 +215,12 @@ produto e quantidade: {ProdutoQuantia}''')
         return dicionario_manutencoes, quantidade_manutencoes
     
 
+    def gerar_lista_equipamento(self):
+        quantidade_relatorios = self.gerar_quantidade_iteracoes()
+
+        lista_equipamento = []
+        for i in range(quantidade_relatorios):
+            equipamento = self.verificar_texto(f'Digite o nome do {i + 1}° equipamento: ')
+            lista_equipamento.append(equipamento)
+        
+        return lista_equipamento, quantidade_relatorios
