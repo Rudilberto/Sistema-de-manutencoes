@@ -247,7 +247,7 @@ class AutomacaoSenior(Image):
 
         self.esperar_por_imagem(self.f210ssm)
 
-        pt.press('tab', presses=17)
+        pt.press('tab', presses=18)
         pt.press('f3')
         
         self.esperar_por_imagem(self.pesquisa_registro)
@@ -302,7 +302,7 @@ class AutomacaoSenior(Image):
             pt.hotkey('alt', 'e')
 
             self.esperar_por_imagem(self.f210ssm)
-            pt.press('tab', presses=13, interval=0.07)
+            pt.press('tab', presses=14, interval=0.07)
             pt.press('f3')
 
             self.esperar_por_imagem(self.pesquisa_registro)
