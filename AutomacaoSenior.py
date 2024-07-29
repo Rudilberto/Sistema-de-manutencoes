@@ -438,7 +438,7 @@ class AutomacaoSenior(Image):
 
         self.esperar_por_imagem(self.f207lot)
 
-        pt.press('tab', presses=18, interval=0.2)
+        pt.press('tab', presses=19, interval=0.2)
 
         for i in range(len(codigos)):
             pt.write(codigos[i])
