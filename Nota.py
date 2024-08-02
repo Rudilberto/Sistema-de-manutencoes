@@ -17,7 +17,7 @@ class Nota(Image):
         if nota == None:
             nota = pt.prompt(text='Digite o numero da nota: ')
 
-        navegador = webdriver.Chrome()
+        navegador = webdriver.Chrome(options=options)
 
         navegador.get(r'http://192.168.0.13/SDE/Login.aspx?ReturnUrl=%2fsde%2f')
 
