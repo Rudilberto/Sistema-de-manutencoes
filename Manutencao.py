@@ -2,6 +2,65 @@ import pyautogui as pt
 
 class Manutencao():
 
+    @staticmethod
+    def verificar_texto(mensagem):
+        while True:
+            texto = pt.prompt(text=mensagem)
+            if not texto:
+                pt.alert(text='Valor inválido', title='Erro de digitação')     
+            else:    
+                break
+
+        return texto.lower()
+
+
+    @staticmethod
+    def verificar_numero(mensagem):
+        while True:
+            numero = pt.prompt(text=mensagem)
+            if numero is None:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            elif not numero:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            else:
+                try:
+                    numero = int(numero)
+                    if numero <= 0:
+                        pt.alert(text='Valor inválido. Digite um número maior que zero.', title='Erro de digitação')
+                    else:
+                        break
+                    
+                except ValueError:
+                    pt.alert(text='Valor inválido. Digite um número válido.', title='Erro de digitação')
+
+        return numero
+    
+    @staticmethod
+    def verificar_float(mensagem):
+        while True:
+            numero = pt.prompt(text=mensagem)
+            if numero is None:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            elif not numero:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            else:
+                try:
+                    numero = float(numero)
+                    if numero <= 0:
+                        pt.alert(text='Valor inválido. Digite um número maior que zero.', title='Erro de digitação')
+                    else:
+                        break
+                    
+                except ValueError:
+                    pt.alert(text='Valor inválido. Digite um número válido.', title='Erro de digitação')
+
+        return numero
+
+
     def gerar_quantidade_iteracoes(self):
         while True:
             quantidade_manutencoes = pt.prompt(text='Digite quantas manutenções/relatórios serão feitos')
@@ -56,7 +115,7 @@ produto e quantidade: {ProdutoQuantia}''')
                 for _ in range(lista_quantos_produtos[a]):
                     n += 1
                     nome_produto = self.verificar_texto(f'Digite o nome do {n}° produto: ')
-                    quantidade = self.verificar_numero(f'Digite a quantidade usada do {n}° produto: ')
+                    quantidade = self.verificar_float(f'Digite a quantidade usada do {n}° produto: ')
                     quantidade = str(quantidade)
 
                     ProdutoQuantia.append((nome_produto, quantidade))
@@ -132,7 +191,7 @@ produto e quantidade: {ProdutoQuantia}''')
                 for _ in range(lista_quantos_produtos[a]):
                     n += 1
                     nome_produto = self.verificar_texto(f'Digite o nome do {n}° produto: ')
-                    quantidade = self.verificar_numero(f'Digite a quantidade usada do {n}° produto: ')
+                    quantidade = self.verificar_float(f'Digite a quantidade usada do {n}° produto: ')
                     quantidade = str(quantidade)
                     
                     cc = ''

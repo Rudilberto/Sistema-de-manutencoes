@@ -8,42 +8,6 @@ import pyautogui as pt
 
 class Robo(AutomacaoSenior, Manutencao, Nota, Estoque):
 
-    @staticmethod
-    def verificar_texto(mensagem):
-        while True:
-            texto = pt.prompt(text=mensagem)
-            if not texto:
-                pt.alert(text='Valor inválido', title='Erro de digitação')     
-            else:    
-                break
-
-        return texto.lower()
-
-
-    @staticmethod
-    def verificar_numero(mensagem):
-        while True:
-            numero = pt.prompt(text=mensagem)
-            if numero is None:
-                pt.alert(text='Valor inválido', title='Erro de digitação')
-
-            elif not numero:
-                pt.alert(text='Valor inválido', title='Erro de digitação')
-
-            else:
-                try:
-                    numero = int(numero)
-                    if numero <= 0:
-                        pt.alert(text='Valor inválido. Digite um número maior que zero.', title='Erro de digitação')
-                    else:
-                        break
-                    
-                except ValueError:
-                    pt.alert(text='Valor inválido. Digite um número válido.', title='Erro de digitação')
-
-        return numero
-
-
     def confirmar_manutencao(self):
         confirmacao_manutencao = pt.confirm(text='''O programa fará as manutenções agora, 
 feche todas as janelas do programa senior, ligue o Caps Lock 
