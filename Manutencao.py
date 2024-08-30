@@ -2,9 +2,68 @@ import pyautogui as pt
 
 class Manutencao():
 
-    def gerar_quantidade_iteracoes(self):
+    @staticmethod
+    def verificar_texto(mensagem):
         while True:
-            quantidade_manutencoes = pt.prompt(text='Digite quantas manutenções/relatórios serão feitos')
+            texto = pt.prompt(text=mensagem)
+            if not texto:
+                pt.alert(text='Valor inválido', title='Erro de digitação')     
+            else:    
+                break
+
+        return texto.lower()
+
+
+    @staticmethod
+    def verificar_numero(mensagem):
+        while True:
+            numero = pt.prompt(text=mensagem)
+            if numero is None:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            elif not numero:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            else:
+                try:
+                    numero = int(numero)
+                    if numero <= 0:
+                        pt.alert(text='Valor inválido. Digite um número maior que zero.', title='Erro de digitação')
+                    else:
+                        break
+                    
+                except ValueError:
+                    pt.alert(text='Valor inválido. Digite um número válido.', title='Erro de digitação')
+
+        return numero
+    
+    @staticmethod
+    def verificar_float(mensagem):
+        while True:
+            numero = pt.prompt(text=mensagem)
+            if numero is None:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            elif not numero:
+                pt.alert(text='Valor inválido', title='Erro de digitação')
+
+            else:
+                try:
+                    numero = float(numero)
+                    if numero <= 0:
+                        pt.alert(text='Valor inválido. Digite um número maior que zero.', title='Erro de digitação')
+                    else:
+                        break
+                    
+                except ValueError:
+                    pt.alert(text='Valor inválido. Digite um número válido.', title='Erro de digitação')
+
+        return numero
+
+
+    def gerar_quantidade_iteracoes(self, message):
+        while True:
+            quantidade_manutencoes = pt.prompt(text=message)
 
             if quantidade_manutencoes is None:
                 pt.alert(text='Campo vazio. Digite um valor.', title='Erro de digitação')
@@ -56,7 +115,7 @@ produto e quantidade: {ProdutoQuantia}''')
                 for _ in range(lista_quantos_produtos[a]):
                     n += 1
                     nome_produto = self.verificar_texto(f'Digite o nome do {n}° produto: ')
-                    quantidade = self.verificar_numero(f'Digite a quantidade usada do {n}° produto: ')
+                    quantidade = self.verificar_float(f'Digite a quantidade usada do {n}° produto: ')
                     quantidade = str(quantidade)
 
                     ProdutoQuantia.append((nome_produto, quantidade))
@@ -79,7 +138,7 @@ produto e quantidade: {ProdutoQuantia}''')
 
     def gerar_dicionario_manutencoes(self):
 
-        quantidade_manutencoes = self.gerar_quantidade_iteracoes()
+        quantidade_manutencoes = self.gerar_quantidade_iteracoes('Digite quantas manutenções serão feitas')
         
         lista_equipamento, lista_descricoes_manutencao, lista_quantos_produtos, produto_quantidade = self.informacoes_manutencao(quantidade_manutencoes)
 
@@ -132,7 +191,7 @@ produto e quantidade: {ProdutoQuantia}''')
                 for _ in range(lista_quantos_produtos[a]):
                     n += 1
                     nome_produto = self.verificar_texto(f'Digite o nome do {n}° produto: ')
-                    quantidade = self.verificar_numero(f'Digite a quantidade usada do {n}° produto: ')
+                    quantidade = self.verificar_float(f'Digite a quantidade usada do {n}° produto: ')
                     quantidade = str(quantidade)
                     
                     cc = ''
@@ -199,7 +258,7 @@ produto e quantidade: {ProdutoQuantia}''')
 
     def gerar_dicionario_manutencoes_compras(self):
 
-        quantidade_manutencoes = self.gerar_quantidade_iteracoes()
+        quantidade_manutencoes = self.gerar_quantidade_iteracoes('Digite quantas manutenções serão feitas')
 
         lista_equipamento, lista_descricoes_manutencao, lista_quantos_produtos, lista_descricoes_compra, produto_quantidade, produto_quantidade_descricao = self.informacoes_manutencao_comprar(quantidade_manutencoes)
 
@@ -213,14 +272,3 @@ produto e quantidade: {ProdutoQuantia}''')
 }
 
         return dicionario_manutencoes, quantidade_manutencoes
-    
-
-    def gerar_lista_equipamento(self):
-        quantidade_relatorios = self.gerar_quantidade_iteracoes()
-
-        lista_equipamento = []
-        for i in range(quantidade_relatorios):
-            equipamento = self.verificar_texto(f'Digite o nome do {i + 1}° equipamento: ')
-            lista_equipamento.append(equipamento)
-        
-        return lista_equipamento, quantidade_relatorios

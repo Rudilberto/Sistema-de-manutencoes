@@ -1,8 +1,8 @@
 import pyautogui as pt
 import time
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 import pyperclip
 from Image import *
@@ -13,12 +13,11 @@ class Nota(Image):
 
         options = webdriver.ChromeOptions()
         options.add_argument('--headless=new')
-        service = Service(ChromeDriverManager().install())
 
         if nota == None:
             nota = pt.prompt(text='Digite o numero da nota: ')
 
-        navegador = webdriver.Chrome(options=options, service=service)
+        navegador = webdriver.Chrome(options=options)
 
         navegador.get(r'http://192.168.0.13/SDE/Login.aspx?ReturnUrl=%2fsde%2f')
 
@@ -29,15 +28,17 @@ class Nota(Image):
 
         navegador.find_element('xpath', '//*[@id="acdMenu"]/div[3]').click()
         time.sleep(1)
+        
         navegador.find_element('xpath', '//*[@id="ctl13_lkbNfeEmissao"]').click()
         time.sleep(1)
+        
         navegador.find_element('xpath', '//*[@id="btnFiltrarNfe"]').click()
         time.sleep(1)
-
+        
         navegador.find_element('xpath',
                                 '//*[@id="filtrofltEmissao3"]').send_keys(nota, Keys.ENTER)
         time.sleep(1)
-
+        
         navegador.find_element('xpath', '//*[@id="nfeGridInfo"]').click()
         navegador.find_element('xpath', '//*[@id="btnDanfe"]').click()
 
