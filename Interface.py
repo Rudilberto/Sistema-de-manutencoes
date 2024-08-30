@@ -50,7 +50,7 @@ class Interface(Robo):
             image = img0,
             borderwidth = 0,
             highlightthickness = 0,
-            command = self.baixar_relatorio_equipamento, 
+            command = self.baixar_relatorio_nfs, 
             relief = "flat")
 
         b.place(

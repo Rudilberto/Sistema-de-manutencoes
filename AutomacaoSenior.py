@@ -1,11 +1,11 @@
-import datetime
+from datetime import datetime, timedelta
 import time
 import pyautogui as pt
 from Image import Image
 
 
 class AutomacaoSenior(Image):
-    data_atual = datetime.date.today()
+    data_atual = datetime.now().date()
     data_atual = data_atual.strftime('%d/%m/%Y')
     
     def comprar_produto(self, dicionario_manutencoes, i):
@@ -548,3 +548,63 @@ class AutomacaoSenior(Image):
         pt.press('enter', presses=2, interval=0.5)
         time.sleep(5)
         pt.hotkey('alt', 'f4')
+
+    
+    def relatorio_nfs(self, lista_nfs):
+        '''Gera e guarda em pdf relatórios do modelo 201'''
+
+        pt.PAUSE = 0.9
+        pt.keyDown('alt')
+        pt.press('t')
+        pt.press('r')
+        pt.keyUp('alt')
+
+        self.esperar_por_imagem(self.modelo201)
+
+        pt.press('tab', presses=6, interval=0.15)
+
+        minus14days = datetime.now() - timedelta(days=14)
+        minus14days = minus14days.strftime('%d/%m/%Y')
+
+        pt.PAUSE = 0.4
+
+        pt.write(minus14days)
+        pt.write('-')
+        pt.write(self.data_atual)
+
+        pt.hotkey('shift', 'tab')
+
+        pt.PAUSE = 0.2
+        for nf in lista_nfs:
+            pt.write(nf)
+            pt.write(',')
+        pt.press('backspace')
+
+        pt.PAUSE = 0.9
+
+        pt.hotkey('alt', 'o')
+
+        # Pergunta se o usuario deseja ou não salvar o relatorio
+        continuar = pt.confirm(text='Deseja salvar o relatório?')
+
+        if continuar == 'OK':
+            self.esperar_por_imagem(self.salvar)
+            imagem = pt.locateCenterOnScreen(self.salvar, confidence=0.9, grayscale=True)
+            pt.click(imagem)
+
+            datahora = datetime.now()
+            datahora = datahora.strftime('%d-%m-%Y, %H-%M-%S')
+
+            pt.write(datahora)
+            pt.press('tab')
+            pt.press('down', presses=18, interval=0.09)
+            pt.press('enter')
+            pt.press('tab', presses=3, interval=0.1)
+            pt.press('down')
+            time.sleep(1)
+            pt.press('up', presses=5)
+            pt.press('enter')
+            pt.press('tab', presses=2, interval=0.1)
+            pt.press('down', presses=9, interval=0.1)
+            pt.press('enter')
+            pt.hotkey('alt', 'l')
