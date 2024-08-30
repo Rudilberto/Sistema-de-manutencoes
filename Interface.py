@@ -11,7 +11,6 @@ class Interface(Robo):
         self.icone = os.path.join(self.diretorio_atual, 'Imagens-interface', 'icon_nelson.ico')
 
         self.backgroundimg = os.path.join(self.diretorio_atual, 'Imagens-interface', 'background.png')
-        self.img = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img.png')
         self.img0 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img0.png')
         self.img1 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img1.png')
         self.img2 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img2.png')
@@ -19,18 +18,22 @@ class Interface(Robo):
         self.img4 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img4.png')
         self.img5 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img5.png')
         self.img6 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img6.png')
+        self.img7 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img7.png')
+        self.img8 = os.path.join(self.diretorio_atual, 'Imagens-interface', 'img8.png')
 
 
     def criar_interface(self):
+        # cor da fonte: rgb(39 43 133)
+        # cor de fundo: rgb(247 247 114)
         self.window = Tk()
         self.window.title('Sistema de Automações')
         self.window.iconbitmap(self.icone)
-        self.window.geometry("365x335+325+210")
+        self.window.geometry("365x372+325+210")
         self.window.configure(bg = "#FFFFFF")
         canvas = Canvas(
             self.window,
             bg = "#FFFFFF",
-            height = 335,
+            height = 372,
             width = 365,
             bd = 0,
             highlightthickness = 0,
@@ -41,13 +44,26 @@ class Interface(Robo):
         background = canvas.create_image(
             182.5, 167.5,
             image=background_img)
-
-        img = PhotoImage(file = self.img)
+        
+        img0 = PhotoImage(file = self.img0)
         b = Button(
-            image = img,
+            image = img0,
             borderwidth = 0,
             highlightthickness = 0,
-            command = self.baixar_relatorio_equipamento, # baixar_relatorio_equipamento - arrumar_estoque
+            command = self.baixar_relatorio_equipamento, 
+            relief = "flat")
+
+        b.place(
+            x = 15, y = 319,
+            width = 160,
+            height = 30)
+
+        img1 = PhotoImage(file = self.img1)
+        b = Button(
+            image = img1,
+            borderwidth = 0,
+            highlightthickness = 0,
+            command = self.baixar_relatorio_equipamento, 
             relief = "flat")
 
         b.place(
@@ -55,12 +71,12 @@ class Interface(Robo):
             width = 160,
             height = 30)
         
-        img0 = PhotoImage(file = self.img0)
+        img2 = PhotoImage(file = self.img2)
         b0 = Button(
-            image = img0,
+            image = img2,
             borderwidth = 0,
             highlightthickness = 0,
-            command = self.arrumar_estoque, # baixar_relatorio_equipamento - arrumar_estoque
+            command = self.arrumar_estoque, 
             relief = "flat")
 
         b0.place(
@@ -68,9 +84,9 @@ class Interface(Robo):
             width = 160,
             height = 30)
 
-        img1 = PhotoImage(file = self.img1)
+        img3 = PhotoImage(file = self.img3)
         b1 = Button(
-            image = img1,
+            image = img3,
             borderwidth = 0,
             highlightthickness = 0,
             command = self.tratar_estoque,
@@ -81,9 +97,9 @@ class Interface(Robo):
             width = 160,
             height = 30)
 
-        img2 = PhotoImage(file = self.img2)
+        img4 = PhotoImage(file = self.img4)
         b2 = Button(
-            image = img2,
+            image = img4,
             borderwidth = 0,
             highlightthickness = 0,
             command = self.emitir_nota_efluente,
@@ -94,9 +110,9 @@ class Interface(Robo):
             width = 160,
             height = 30)
 
-        img3 = PhotoImage(file = self.img3)
+        img5= PhotoImage(file = self.img5)
         b3 = Button(
-            image = img3,
+            image = img5,
             borderwidth = 0,
             highlightthickness = 0,
             command = self.baixar_nota,
@@ -107,9 +123,9 @@ class Interface(Robo):
             width = 160,
             height = 30)
 
-        img4 = PhotoImage(file = self.img4)
+        img6 = PhotoImage(file = self.img6)
         b4 = Button(
-            image = img4,
+            image = img6,
             borderwidth = 0,
             highlightthickness = 0,
             command = self.comprar_material,
@@ -120,9 +136,9 @@ class Interface(Robo):
             width = 160,
             height = 30)
 
-        img5 = PhotoImage(file = self.img5)
+        img7 = PhotoImage(file = self.img7)
         b5 = Button(
-            image = img5,
+            image = img7,
             borderwidth = 0,
             highlightthickness = 0,
             command = self.fazer_manutencao_comprar,
@@ -133,9 +149,9 @@ class Interface(Robo):
             width = 160,
             height = 30)
 
-        img6 = PhotoImage(file = self.img6)
+        img8 = PhotoImage(file = self.img8)
         b6 = Button(
-            image = img6,
+            image = img8,
             borderwidth = 0,
             highlightthickness = 0,
             command = self.fazer_manutencao,

@@ -112,8 +112,3 @@ class Nota(Image):
         pt.hotkey('ctrl', 'f4')
 
         self.baixar_nota(nota=nota)
-
-
-if __name__=='__main__':
-    nota = Nota()
-    nota.baixar_nota()
