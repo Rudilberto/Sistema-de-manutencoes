@@ -585,6 +585,7 @@ class AutomacaoSenior(Image):
         pt.hotkey('alt', 'o')
 
         # Pergunta se o usuario deseja ou não salvar o relatorio
+        time.sleep(2)
         continuar = pt.confirm(text='Deseja salvar o relatório?')
 
         if continuar == 'OK':
@@ -602,7 +603,7 @@ class AutomacaoSenior(Image):
             pt.press('tab', presses=3, interval=0.1)
             pt.press('down')
             time.sleep(1)
-            pt.press('up', presses=5)
+            pt.press('up', presses=5, interval=0.1)
             pt.press('enter')
             pt.press('tab', presses=2, interval=0.1)
             pt.press('down', presses=9, interval=0.1)
