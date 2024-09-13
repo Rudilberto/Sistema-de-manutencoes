@@ -139,19 +139,13 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
 
         self.window.destroy()
 
+        pt.PAUSE = 0.8
+
         pt.hotkey('alt', 'tab')
         while not pt.locateOnScreen(self.logo, confidence=0.9, grayscale=True):
             pt.hotkey('alt','shift','tab')
             time.sleep(0.2)
 
-        pt.PAUSE = 0.8
-        # Acha o programa
-        pt.hotkey('alt', 'tab')
-        time.sleep(1.5)
-
-        while not pt.locateOnScreen(f'{self.logo}', confidence=0.9, grayscale=True):
-            time.sleep(1)
-            pt.hotkey('alt', 'shift', 'tab')
 
         for equipamento in lista_equipamento:
             self.relatorio_equipamento(equipamento)
@@ -162,15 +156,21 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
 
     
     def baixar_relatorio_nfs(self):
-        quantidade_notas = self.gerar_quantidade_iteracoes('Digite quantas notas terão no relatório')
 
-        lista_nfs = [self.verificar_texto(f'Digite o número da {i + 1}° nota') for i in range(quantidade_notas)]
+        lista_nfs = []
+
+        while True:
+            nota = pt.prompt('Digite o número da nota:')
+            if nota == None or nota == '':
+                break
+            lista_nfs.append(nota)
 
         pt.alert(text='Iniciando download de relatorios', title='alerta')
 
         self.window.destroy()
 
-        pt.hotkey('alt', 'tab')
+        pt.PAUSE = 0.8
+
         while not pt.locateOnScreen(self.logo, confidence=0.9, grayscale=True):
             pt.hotkey('alt','shift','tab')
             time.sleep(0.2)

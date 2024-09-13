@@ -589,9 +589,13 @@ class AutomacaoSenior(Image):
         continuar = pt.confirm(text='Deseja salvar o relatório?')
 
         if continuar == 'OK':
+            pt.PAUSE = 1
+            time.sleep(1)
             self.esperar_por_imagem(self.salvar)
             imagem = pt.locateCenterOnScreen(self.salvar, confidence=0.9, grayscale=True)
             pt.click(imagem)
+
+            time.sleep(1.5)
 
             datahora = datetime.now()
             datahora = datahora.strftime('%d-%m-%Y, %H-%M-%S')
@@ -601,8 +605,10 @@ class AutomacaoSenior(Image):
             pt.press('down', presses=18, interval=0.09)
             pt.press('enter')
             pt.press('tab', presses=3, interval=0.1)
+            time.sleep(0.5)
+            # TODO entender porque as vezes nao vai para baixo
             pt.press('down')
-            time.sleep(1)
+            time.sleep(0.5)
             pt.press('up', presses=5, interval=0.1)
             pt.press('enter')
             pt.press('tab', presses=2, interval=0.1)
