@@ -27,6 +27,7 @@ class Image():
     modelo501 = os.path.join(diretorio_atual, 'Imagens', 'modelo501.PNG')
     salvar = os.path.join(diretorio_atual, 'Imagens', 'salvar.PNG')
     modelo201 = os.path.join(diretorio_atual, 'Imagens', 'modelo201.PNG')
+    areadetrabalho = os.path.join(diretorio_atual, 'Imagens', 'areadetrabalho.PNG')
 
 
     def esperar_por_imagem(self, imagem):
