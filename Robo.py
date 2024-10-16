@@ -157,14 +157,6 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
     
     def baixar_relatorio_nfs(self):
 
-        lista_nfs = []
-
-        while True:
-            nota = pt.prompt('Digite o número da nota:')
-            if nota == None or nota == '':
-                break
-            lista_nfs.append(nota)
-
         pt.alert(text='Iniciando download de relatorios', title='alerta')
 
         self.window.destroy()
@@ -175,7 +167,7 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
             pt.hotkey('alt','shift','tab')
             time.sleep(0.2)
 
-        self.relatorio_nfs(lista_nfs)
+        self.relatorio_nfs()
 
         pt.alert(text='Relatorios baixados!')
         self.criar_interface()

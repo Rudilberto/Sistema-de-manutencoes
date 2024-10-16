@@ -1,8 +1,7 @@
 import pyautogui as pt
 import time
 from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service
-# from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.keys import Keys
 import pyperclip
 from Image import *
@@ -11,13 +10,16 @@ class Nota(Image):
 
     def baixar_nota(self, nota=None):
 
-        options = webdriver.ChromeOptions()
+        options = Options()
         options.add_argument('--headless=new')
+        options.add_argument('--disable-identity-sync')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
 
         if nota == None:
             nota = pt.prompt(text='Digite o numero da nota: ')
 
-        navegador = webdriver.Chrome(options=options)
+        navegador = webdriver.Edge(options=options)
 
         navegador.get(r'http://192.168.0.13/SDE/Login.aspx?ReturnUrl=%2fsde%2f')
 

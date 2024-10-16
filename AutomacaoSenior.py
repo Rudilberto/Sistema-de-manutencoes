@@ -550,7 +550,7 @@ class AutomacaoSenior(Image):
         pt.hotkey('alt', 'f4')
 
     
-    def relatorio_nfs(self, lista_nfs):
+    def relatorio_nfs(self):
         '''Gera e guarda em pdf relatórios do modelo 201'''
 
         pt.PAUSE = 0.9
@@ -563,22 +563,9 @@ class AutomacaoSenior(Image):
 
         pt.press('tab', presses=6, interval=0.15)
 
-        minus14days = datetime.now() - timedelta(days=14)
-        minus14days = minus14days.strftime('%d/%m/%Y')
-
         pt.PAUSE = 0.4
 
-        pt.write(minus14days)
-        pt.write('-')
         pt.write(self.data_atual)
-
-        pt.hotkey('shift', 'tab')
-
-        pt.PAUSE = 0.2
-        for nf in lista_nfs:
-            pt.write(nf)
-            pt.write(',')
-        pt.press('backspace')
 
         pt.PAUSE = 0.9
 
