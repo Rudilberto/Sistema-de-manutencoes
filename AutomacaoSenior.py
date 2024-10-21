@@ -561,7 +561,7 @@ class AutomacaoSenior(Image):
 
         self.esperar_por_imagem(self.modelo201)
 
-        pt.press('tab', presses=6, interval=0.15)
+        pt.press('tab', presses=5, interval=0.15)
 
         pt.PAUSE = 0.4
 
