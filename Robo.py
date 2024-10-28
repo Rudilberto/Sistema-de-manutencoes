@@ -157,6 +157,7 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
     
     def baixar_relatorio_nfs(self):
 
+        data_relatorio = self.verificar_texto('Digite a data para o relatório:')
         pt.alert(text='Iniciando download de relatorios', title='alerta')
 
         self.window.destroy()
@@ -167,7 +168,7 @@ ou se preferir clique em cancelar para cancelar a manutenção''')
             pt.hotkey('alt','shift','tab')
             time.sleep(0.2)
 
-        self.relatorio_nfs()
+        self.relatorio_nfs(data_relatorio)
 
         pt.alert(text='Relatorios baixados!')
         self.criar_interface()

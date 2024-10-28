@@ -550,7 +550,7 @@ class AutomacaoSenior(Image):
         pt.hotkey('alt', 'f4')
 
     
-    def relatorio_nfs(self):
+    def relatorio_nfs(self, data_relatorio):
         '''Gera e guarda em pdf relatórios do modelo 201'''
 
         pt.PAUSE = 0.9
@@ -565,7 +565,7 @@ class AutomacaoSenior(Image):
 
         pt.PAUSE = 0.4
 
-        pt.write(self.data_atual)
+        pt.write(data_relatorio)
 
         pt.PAUSE = 0.9
 
